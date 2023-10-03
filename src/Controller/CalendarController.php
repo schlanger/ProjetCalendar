@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Tache;
 use App\Repository\TacheRepository;
 use phpDocumentor\Reflection\DocBlock\Tags\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,9 +15,57 @@ class CalendarController extends AbstractController
     public function index(TacheRepository $tacheRepository):Response
     {
         $travaux = $tacheRepository->findAll();
-        dd($travaux);
+
+        $dvrs = [];
+        foreach($travaux as $t){
+            /*$nom = $t->getNom();
+            $description = $t->getDescription();
+            $debut = $t->getDebut()->format('Y-m-d H:i:s');
+            $fin = $t->getFin()->format('Y-m-d H:i:s');
+            $background = $t->getBackgroundColor();
+            $journee = $t->getToutelaJournee();*/
+            $dvrs[] = [
+                'id' => $t->getId(),
+                'nom'=> $t->getNom(),
+                'description'=> $t->getDescription(),
+                'debut' => $t->getDebut()->format('Y-m-d H:i:s'),
+                'fin' => $t->getFin()->format('Y-m-d H:i:s'),
+                'color' => $t->getBackgroundColor(),
+                'journee' => $t->getToutelaJournee()
+            ];}
+            foreach($travaux as $t){
+             $title = $t->getNom();
+             $start = $t->getDebut()->format('Y-m-d H:i:s');
+             $end = $t->getFin()->format('Y-m-d H:i:s');
+             $description = $t->getDescription();
+
+        }
+        $data = json_encode($dvrs);
+        //dd($data);
+        $type = gettype($dvrs);
+        echo  "###############################################";
+        echo "Le type de la variable est : " . $type;
+        //dd($data);
+        //dd($travaux);
+
+
         return $this->render('calendar/index.html.twig', [
-            'controller_name' => 'CalendarController',
+            'data'=>($data),
+            'title'=> json_encode($title),
+            'start' => json_encode($start),
+            'end' => json_encode($end),
+            'description' => json_encode($description)
         ]);
+
+            /*'nom'=>json_encode($nom),
+            'desc' => json_encode($description),
+            'debut' => json_encode($debut),
+            'fin' => json_encode($fin),
+            'color' => json_encode($background),
+            'travail' => $travaux
+            ]);*/
+
+
+
     }
 }

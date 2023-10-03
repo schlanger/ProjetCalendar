@@ -11,25 +11,32 @@
     </style>
 {% endblock %}
 {% block body %}
+    {{ dump(data) }}
  <div id="calendrier">
-
  </div>
 {% endblock %}
 {%  block javascripts %}
     <script>
         window.onload = () => {
             let calendar = document.querySelector("#calendrier")
-
+            console.log(JSON.parse('{{ data|json_encode|e("js") }}'));
             let calendarier = new FullCalendar.Calendar(calendar, {
                 initialView : 'dayGridMonth',
                 locale: 'fr',
                 timeZone: 'Europe/Paris',
-                headerToolBar : {
-                    start: 'prev,next,today',
-                    center : 'title',
-                    end: 'dayGridMonth,timeGridWeek'
-                }
+                headerToolbar: { center: 'dayGridMonth,timeGridWeek' }, // buttons for switching between views
+                events : [
+                    {
+                        title: {{ title|raw }},
+                        start: {{ start|raw }},
+                        end: {{ end|raw }},
+                        description : {{ description|raw }},
+                        allday : false
+                    }
 
+                ],
+                editable: true,
+                eventResizableFromStart: true,
             })
             calendarier.render()
         }

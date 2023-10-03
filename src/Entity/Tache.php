@@ -17,17 +17,20 @@ class Tache
     #[ORM\Column(length: 20)]
     private ?string $nom = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $date = null;
-
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $description = null;
 
-    #[ORM\Column(type: Types::TIME_MUTABLE)]
-    private ?\DateTimeInterface $heure = null;
-
     #[ORM\Column(length: 10)]
     private ?string $background_color = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $debut = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $fin = null;
+
+    #[ORM\Column]
+    private ?bool $ToutelaJournee = null;
 
     public function getId(): ?int
     {
@@ -46,17 +49,6 @@ class Tache
         return $this;
     }
 
-    public function getDate(): ?\DateTimeInterface
-    {
-        return $this->date;
-    }
-
-    public function setDate(\DateTimeInterface $date): static
-    {
-        $this->date = $date;
-
-        return $this;
-    }
 
     public function getDescription(): ?string
     {
@@ -70,26 +62,59 @@ class Tache
         return $this;
     }
 
-    public function getHeure(): ?\DateTimeInterface
-    {
-        return $this->heure;
-    }
-
-    public function setHeure(\DateTimeInterface $heure): static
-    {
-        $this->heure = $heure;
-
-        return $this;
-    }
 
     public function getBackgroundColor(): ?string
     {
         return $this->background_color;
     }
 
+    /**
+     * @return bool|null
+     */
+    public function getToutelaJournee(): ?bool
+    {
+        return $this->ToutelaJournee;
+    }
+
     public function setBackgroundColor(string $background_color): static
     {
         $this->background_color = $background_color;
+
+        return $this;
+    }
+
+    public function getDebut(): ?\DateTimeInterface
+    {
+        return $this->debut;
+    }
+
+    public function setDebut(\DateTimeInterface $debut): static
+    {
+        $this->debut = $debut;
+
+        return $this;
+    }
+
+    public function getFin(): ?\DateTimeInterface
+    {
+        return $this->fin;
+    }
+
+    public function setFin(\DateTimeInterface $fin): static
+    {
+        $this->fin = $fin;
+
+        return $this;
+    }
+
+    public function isToutelaJournee(): ?bool
+    {
+        return $this->ToutelaJournee;
+    }
+
+    public function setToutelaJournee(bool $ToutelaJournee): static
+    {
+        $this->ToutelaJournee = $ToutelaJournee;
 
         return $this;
     }

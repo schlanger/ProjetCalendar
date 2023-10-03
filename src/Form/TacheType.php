@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Tache;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ColorType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -15,10 +16,12 @@ class TacheType extends AbstractType
     {
         $builder
             ->add('nom')
-            ->add('date',DateType::class,  [
-                'widget' => 'single_text',  'required'   => true, 'label' => "Date de la tache à réaliser" ])
+            ->add('debut',DateTimeType::class,  [
+                'date_widget' => 'single_text',  'required'   => true, 'label' => "Date de debut  de la tache à réaliser" ])
+            ->add('fin',DateTimeType::class,  [
+                'date_widget' => 'single_text',  'required'   => true, 'label' => "Date de fin de la tache à réaliser" ])
             ->add('description')
-            ->add('heure')
+            ->add('ToutelaJournee')
             ->add('background_color',ColorType::class)
         ;
     }

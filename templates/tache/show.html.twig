@@ -16,16 +16,16 @@
                 <td>{{ tache.nom }}</td>
             </tr>
             <tr>
-                <th>Date</th>
-                <td>{{ tache.date ? tache.date|date('Y-m-d') : '' }}</td>
+                <th>Debut</th>
+                <td>{{ tache.debut ? tache.debut|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Fin</th>
+                <td>{{ tache.fin ? tache.fin|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
                 <th>Description</th>
                 <td>{{ tache.description }}</td>
-            </tr>
-            <tr>
-                <th>Heure</th>
-                <td>{{ tache.heure ? tache.heure|date('H:i:s') : '' }}</td>
             </tr>
             <tr>
                 <th>Background_color</th>
