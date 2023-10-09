@@ -38,7 +38,7 @@ class CalendarController extends AbstractController
              $start = $t->getDebut()->format('Y-m-d H:i:s');
              $end = $t->getFin()->format('Y-m-d H:i:s');
              $description = $t->getDescription();
-
+             $color = $t->getBackgroundColor();
         }
         $data = json_encode($dvrs);
         //dd($data);
@@ -54,7 +54,8 @@ class CalendarController extends AbstractController
             'title'=> json_encode($title),
             'start' => json_encode($start),
             'end' => json_encode($end),
-            'description' => json_encode($description)
+            'description' => json_encode($description),
+            'color' => json_encode($color)
         ]);
 
             /*'nom'=>json_encode($nom),
