@@ -17,6 +17,8 @@ class TacheController extends AbstractController
     #[Route('/', name: 'app_tache_index', methods: ['GET'])]
     public function index(TacheRepository $tacheRepository): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         return $this->render('tache/index.html.twig', [
             'taches' => $tacheRepository->findAll(),
         ]);
@@ -25,6 +27,8 @@ class TacheController extends AbstractController
     #[Route('/new', name: 'app_tache_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         $tache = new Tache();
         $form = $this->createForm(TacheType::class, $tache);
         $form->handleRequest($request);
@@ -45,6 +49,8 @@ class TacheController extends AbstractController
     #[Route('/{id}', name: 'app_tache_show', methods: ['GET'])]
     public function show(Tache $tache): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         return $this->render('tache/show.html.twig', [
             'tache' => $tache,
         ]);
@@ -53,6 +59,8 @@ class TacheController extends AbstractController
     #[Route('/{id}/edit', name: 'app_tache_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Tache $tache, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         $form = $this->createForm(TacheType::class, $tache);
         $form->handleRequest($request);
 
@@ -71,6 +79,8 @@ class TacheController extends AbstractController
     #[Route('/{id}', name: 'app_tache_delete', methods: ['POST'])]
     public function delete(Request $request, Tache $tache, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         if ($this->isCsrfTokenValid('delete'.$tache->getId(), $request->request->get('_token'))) {
             $entityManager->remove($tache);
             $entityManager->flush();

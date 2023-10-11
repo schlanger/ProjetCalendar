@@ -14,6 +14,8 @@ class CalendarController extends AbstractController
     #[Route('/', name: 'app_calendar',methods: ['GET'])]
     public function index(TacheRepository $tacheRepository):Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         $travaux = $tacheRepository->findAll();
 
         $dvrs = [];
