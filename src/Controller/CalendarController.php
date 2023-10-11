@@ -44,11 +44,11 @@ class CalendarController extends AbstractController
         }
         $data = json_encode($dvrs);
         //dd($data);
-        $type = gettype($dvrs);
+        /*$type = gettype($dvrs);
         echo  "###############################################";
         echo "Le type de la variable est : " . $type;
         //dd($data);
-        //dd($travaux);
+        //dd($travaux);*/
 
 
         return $this->render('calendar/index.html.twig', [

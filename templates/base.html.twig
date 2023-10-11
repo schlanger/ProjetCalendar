@@ -17,6 +17,55 @@
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <!-- Container wrapper -->
+            <div class="container">
+                <!-- Navbar brand -->
+                <a class="navbar-brand me-2" href="{{ path('app_calendar') }}">
+                    <img
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFN1I42Bcd0xr5G2z9iu54P_TYd04vjhw5SQ&usqp=CAU"
+                            height="60"
+                            alt="MDB Logo"
+                            loading="lazy"
+                            style="margin-top: -1px;"
+                    />
+                </a>
+
+                <!-- Toggle button -->
+                <button
+                        class="navbar-toggler"
+                        type="button"
+                        data-mdb-toggle="collapse"
+                        data-mdb-target="#navbarButtonsExample"
+                        aria-controls="navbarButtonsExample"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation"
+                >
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <!-- Collapsible wrapper -->
+                <div class="collapse navbar-collapse" id="navbarButtonsExample">
+                    <!-- Left links -->
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_calendar') }}">Dashboard</a>
+                        </li>
+                    </ul>
+                    <!-- Left links -->
+
+                    <div class="d-flex align-items-center">
+                        <a href="{{ path('app_login') }}" class="btn btn-primary">Login</a>
+                        <a href="{{ path('app_user_new') }}" class="btn btn-green">Sign up</a>
+
+                    </div>
+                </div>
+                <!-- Collapsible wrapper -->
+            </div>
+            <!-- Container wrapper -->
+        </nav>
+        <!-- Navbar -->
     </head>
     <body>
         {% block body %}{% endblock %}
