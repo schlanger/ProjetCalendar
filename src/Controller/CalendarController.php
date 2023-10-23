@@ -15,8 +15,9 @@ class CalendarController extends AbstractController
     public function index(TacheRepository $tacheRepository):Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
 
-        $travaux = $tacheRepository->findAll();
+        $travaux = $tacheRepository->findByUser($user);
 
         $dvrs = [];
         foreach($travaux as $t){

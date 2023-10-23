@@ -26,6 +26,7 @@
                 <td>{{ tache.fin ? tache.fin|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ tache.description }}</td>
                 <td>{{ tache.backgroundColor }}</td>
+
                 <td>
                     <a href="{{ path('app_tache_show', {'id': tache.id}) }}">show</a>
                     <a href="{{ path('app_tache_edit', {'id': tache.id}) }}">edit</a>

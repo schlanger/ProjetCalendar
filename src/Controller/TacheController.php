@@ -18,9 +18,10 @@ class TacheController extends AbstractController
     public function index(TacheRepository $tacheRepository): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user= $this->getUser();
 
         return $this->render('tache/index.html.twig', [
-            'taches' => $tacheRepository->findAll(),
+            'taches' => $tacheRepository->findByUser($user),
         ]);
     }
 
@@ -32,8 +33,11 @@ class TacheController extends AbstractController
         $tache = new Tache();
         $form = $this->createForm(TacheType::class, $tache);
         $form->handleRequest($request);
+        $user= $this->getUser();
+        //dd($user);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $tache->setUserId($user);
             $entityManager->persist($tache);
             $entityManager->flush();
 
@@ -63,6 +67,7 @@ class TacheController extends AbstractController
 
         $form = $this->createForm(TacheType::class, $tache);
         $form->handleRequest($request);
+
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
