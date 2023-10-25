@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Tache;
 use App\Repository\TacheRepository;
 use phpDocumentor\Reflection\DocBlock\Tags\Method;
+use phpDocumentor\Reflection\Types\True_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -45,13 +46,11 @@ class CalendarController extends AbstractController
              $id = $t->getId();
         }
         $data = json_encode($dvrs);
-        //dd($data);
         /*$type = gettype($dvrs);
         echo  "###############################################";
         echo "Le type de la variable est : " . $type;
-        //dd($data);
+        dd($data);
         //dd($travaux);*/
-
 
         return $this->render('calendar/index.html.twig', [
             'data'=>($data),

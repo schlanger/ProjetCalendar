@@ -28,8 +28,8 @@
                 <td>{{ tache.backgroundColor }}</td>
 
                 <td>
-                    <a href="{{ path('app_tache_show', {'id': tache.id}) }}">show</a>
-                    <a href="{{ path('app_tache_edit', {'id': tache.id}) }}">edit</a>
+                    <a href="{{ path('app_tache_show', {'id': tache.id}) }}" class="btn btn-warning">show</a>
+                    <a href="{{ path('app_tache_edit', {'id': tache.id}) }}" class="btn btn-light">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -40,5 +40,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_tache_new') }}">Create new</a>
+    <a href="{{ path('app_tache_new') }}" class="btn btn-outline-primary">Create new</a>
 {% endblock %}

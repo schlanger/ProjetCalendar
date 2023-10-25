@@ -36,7 +36,7 @@
 
     <a href="{{ path('app_tache_index') }}">back to list</a>
 
-    <a href="{{ path('app_tache_edit', {'id': tache.id}) }}">edit</a>
+    <a href="{{ path('app_tache_edit', {'id': tache.id}) }}" class="btn btn-light">edit</a>
 
     {{ include('tache/_delete_form.html.twig') }}
 {% endblock %}

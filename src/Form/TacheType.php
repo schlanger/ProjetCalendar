@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Tache;
 use Doctrine\DBAL\Types\BooleanType;
 use Doctrine\DBAL\Types\StringType;
+use phpDocumentor\Reflection\PseudoTypes\False_;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ColorType;
@@ -32,7 +33,7 @@ class TacheType extends AbstractType
                     'class' => 'form-control',
                     'max' => date('Y-m-d') ]])
             ->add('description',TextType::class,array('attr'=>['class'=>'form-control']))
-            ->add('ToutelaJournee',CheckboxType::class,array('attr'=>['class'=>'form-check-input']))
+            ->add('ToutelaJournee')
             ->add('background_color',ColorType::class)
         ;
     }
