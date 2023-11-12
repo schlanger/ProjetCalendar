@@ -17,6 +17,7 @@
     </button>
         <div id="calendrier">
  </div>
+
 {% endblock %}
 {%  block javascripts %}
     <script>
@@ -32,14 +33,39 @@
                 eventResizableFromStart: true,
                 events :
                     [
-                    {
-                        title  : {{ title|raw }},
-                        start  : {{ start|raw }},
-                        end : {{ end|raw }},
-                        description : {{ description|raw }},
-                        color: {{ color|raw }},
-                        url : 'http://127.0.0.1:8000/tache/{{ id }}/edit'
-                    },
+                        {% for tache in taches  %}
+                        {
+
+                            title  : '{{ tache.nom}}',
+                            start  : '{{ tache.debut ? tache.debut|date('Y-m-d')}}',
+                            end : '{{ tache.fin ? tache.fin|date('Y-m-d') : ''}}',
+                            color: '{{ tache.backgroundColor }}',
+                            url : 'http://127.0.0.1:8000/tache/{{ tache.id }}/edit'
+                        },
+                        {
+
+                        },
+                        {
+
+                        },
+                        {% endfor %}
+                        {
+                            title : 'Toussaint',
+                            start: '2023-11-01',
+                            end : '2023-11-01',
+                            description: 'jour férié ',
+                            color : 'red'
+                        },
+                        {
+                            title: {{ value|raw}},
+                            start : {{ JoursFeries|raw}},
+                            color : 'pink'
+                        },
+                        {
+                            title: {{ value2|raw }},
+                            start : {{ paques|raw }},
+                            color : 'brown'
+                        }
                 ],
                 eventClick: function(info) {
                     info.jsEvent.preventDefault(); // don't let the browser navigate

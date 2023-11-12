@@ -35,7 +35,6 @@ class TacheController extends AbstractController
         $form->handleRequest($request);
         $user= $this->getUser();
         //dd($user);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $tache->setUserId($user);
             $entityManager->persist($tache);
@@ -43,6 +42,7 @@ class TacheController extends AbstractController
 
             return $this->redirectToRoute('app_tache_index', [], Response::HTTP_SEE_OTHER);
         }
+        //echo $form->get('description')->getData();
 
         return $this->renderForm('tache/new.html.twig', [
             'tache' => $tache,
@@ -54,6 +54,7 @@ class TacheController extends AbstractController
     public function show(Tache $tache): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        //echo $tache->getDescription();
 
         return $this->render('tache/show.html.twig', [
             'tache' => $tache,

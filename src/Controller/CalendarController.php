@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Tache;
 use App\Repository\TacheRepository;
+use App\Service\CallApiService;
 use phpDocumentor\Reflection\DocBlock\Tags\Method;
 use phpDocumentor\Reflection\Types\True_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,14 +13,16 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CalendarController extends AbstractController
 {
+
     #[Route('/', name: 'app_calendar',methods: ['GET'])]
-    public function index(TacheRepository $tacheRepository):Response
+    public function index(TacheRepository $tacheRepository,CallApiService $apiService):Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
+        //dd($apiService->getDayData());
 
         $travaux = $tacheRepository->findByUser($user);
-
+        $tache = new Tache();
         $dvrs = [];
         foreach($travaux as $t){
             /*$nom = $t->getNom();
@@ -37,11 +40,7 @@ class CalendarController extends AbstractController
                 'color' => $t->getBackgroundColor(),
                 'journee' => $t->getToutelaJournee()
             ];}
-            foreach($travaux as $t){
-             $title = $t->getNom();
-             $start = $t->getDebut()->format('Y-m-d H:i:s');
-             $end = $t->getFin()->format('Y-m-d H:i:s');
-             $description = $t->getDescription();
+             foreach($travaux as $t){
              $color = $t->getBackgroundColor();
              $id = $t->getId();
         }
@@ -51,15 +50,19 @@ class CalendarController extends AbstractController
         echo "Le type de la variable est : " . $type;
         dd($data);
         //dd($travaux);*/
+        $result = $apiService->getDayData();
+        $key = array_keys($result);
+        $value = array_values($result);
 
         return $this->render('calendar/index.html.twig', [
+            'taches' => $tacheRepository->findByUser($user),
             'data'=>($data),
-            'title'=> json_encode($title),
-            'start' => json_encode($start),
-            'end' => json_encode($end),
-            'description' => json_encode($description),
             'color' => json_encode($color),
-            'id' => json_encode($id)
+            'id'=> $id,
+            'JoursFeries'=> json_encode($key[0]),
+            'value'=> json_encode($value[0]),
+            'paques'=> json_encode($key[1]),
+            'value2' =>json_encode($value[1])
         ]);
 
             /*'nom'=>json_encode($nom),
