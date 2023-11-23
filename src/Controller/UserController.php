@@ -6,9 +6,12 @@ use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -27,7 +30,7 @@ class UserController extends AbstractController
     }
 
     #[Route('/new', name: 'app_user_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager,UserPasswordHasherInterface $passwordHasher,UserRepository $userRepository): Response
+    public function new(Request $request, EntityManagerInterface $entityManager,UserPasswordHasherInterface $passwordHasher,UserRepository $userRepository,MailerInterface $mailer): Response
     {
 
         $user = new User();
@@ -40,6 +43,15 @@ class UserController extends AbstractController
             $user->setPassword($passwordHasher->hashPassword($user, $user->getPassword()));
             $entityManager->persist($user);
             $entityManager->flush();
+
+            $email = (new TemplatedEmail())
+                ->from(new Address('yehouda@calendar.com', 'welcom'))
+                ->to($user->getEmail())
+                ->subject('Your new Appcalendar website')
+                ->htmlTemplate('user/Mail.html.twig')
+            ;
+
+            $mailer->send($email);
 
             return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
         }

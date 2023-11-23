@@ -65,7 +65,18 @@
                             title: {{ value2|raw }},
                             start : {{ paques|raw }},
                             color : 'brown'
+                        },
+                        {
+                            title : {{ Armistice2|raw }},
+                            start : {{ Armistice|raw }},
+                            color : 'golden'
+                        },
+                        {
+                            title : {{ Noel2|raw }},
+                            start : {{ Noel|raw }},
+                            color : 'purple'
                         }
+
                 ],
                 eventClick: function(info) {
                     info.jsEvent.preventDefault(); // don't let the browser navigate

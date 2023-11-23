@@ -53,16 +53,21 @@ class CalendarController extends AbstractController
         $result = $apiService->getDayData();
         $key = array_keys($result);
         $value = array_values($result);
+        //dd($result );
 
         return $this->render('calendar/index.html.twig', [
             'taches' => $tacheRepository->findByUser($user),
             'data'=>($data),
-            'color' => json_encode($color),
-            'id'=> $id,
             'JoursFeries'=> json_encode($key[0]),
+            'result ' => json_encode($result),
             'value'=> json_encode($value[0]),
             'paques'=> json_encode($key[1]),
-            'value2' =>json_encode($value[1])
+            'value2' =>json_encode($value[1]),
+            'Armistice' => json_encode($key[9]),
+            'Armistice2' => json_encode($value[9]),
+            'Noel' => json_encode($key[10]),
+            'Noel2' => json_encode($value[10])
+
         ]);
 
             /*'nom'=>json_encode($nom),
