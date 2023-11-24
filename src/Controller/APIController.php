@@ -16,10 +16,8 @@ class APIController extends AbstractController
         $result = $apiService->getDayData();
         $key = array_keys($result);
         //print_r($key);
-        //$yourApiKey = getenv('OPENAI_API_KEY');
-        /*$client = OpenAI::client('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');
 
-        $result = $client->chat()->create([
+        /*$result = $client->chat()->create([
             'model' => 'tts-1',
             'messages' => [
                 ['role' => 'user', 'content' => 'Hello!'],

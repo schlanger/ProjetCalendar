@@ -8,11 +8,19 @@
     {% if error %}
         <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
-
+ <!--<style>
+    .bg_color {
+        background-image: url("https://marcomconseils.com/content/uploads/2023/03/04-MarComConseils_Calendrier_FondEcran2023.jpg");
+        background-size: 1550px;
+        width: 1600px;
+        height: 850px;
+        background-repeat : no-repeat;
+    }
+</style> -->
 
 
         <!--Section: Demo-->
-
+<div class="bg_color">
         <section class="pb-4 mt-5">
             <div class="bg-white border rounded-5" style="
               margin-inline: 32%;
@@ -59,6 +67,6 @@
                         </div>
                     </form>
                 </section>
-
+            </div>
 
 {% endblock %}

@@ -19,7 +19,7 @@
         {% endblock %}
         <!-- Navbar -->
         <div class="image-accueil">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIxChGyaDr507CMqGHiVkhEFmPnBYZpi-KcvLioyqyUbEV8iIdBfjMr74ESczUuj6VC_8&usqp=CAU'); background-size: 140px">
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #3b4151">
             <!-- Container wrapper -->
             <div class="container">
                 <!-- Navbar brand -->
@@ -57,7 +57,6 @@
                     <div class="d-flex align-items-center">
                         <a href="{{ path('app_logout') }}" class="btn btn-danger">Logout</a>
                      {% else %}
-                         <a href="{{ path('app_login') }}" class="btn btn-primary">Login</a>
                          <a href="{{ path('app_user_new') }}" class="btn btn-success">Sign up</a>
                     </div>
                     {% endif %}
