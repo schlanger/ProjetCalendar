@@ -1,11 +1,57 @@
-<h1>Hi! Please confirm your email!</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Email Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        p {
+            color: #555;
+            text-align: center;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        a:hover {
+            background-color: #2980b9;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        .fadeIn {
+            animation: fadeIn 1s ease;
+        }
+    </style>
+</head>
+<body>
+<h1 class="fadeIn">Hi! Please confirm your email!</h1>
 
-<p>
+<p class="fadeIn">
     Please confirm your email address by clicking the following link: <br><br>
     <a href="{{ signedUrl|raw }}">Confirm my Email</a>.
     This link will expire in {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.
 </p>
 
-<p>
+<p class="fadeIn">
     Cheers!
 </p>
+</body>
+</html>

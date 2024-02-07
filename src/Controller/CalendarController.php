@@ -7,15 +7,18 @@ use App\Repository\TacheRepository;
 use App\Service\CallApiService;
 use phpDocumentor\Reflection\DocBlock\Tags\Method;
 use phpDocumentor\Reflection\Types\True_;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Annotation\Route;
 
 class CalendarController extends AbstractController
 {
 
     #[Route('/', name: 'app_calendar',methods: ['GET'])]
-    public function index(TacheRepository $tacheRepository,CallApiService $apiService):Response
+    public function index(TacheRepository $tacheRepository,CallApiService $apiService,MailerInterface $mailer):Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
@@ -53,7 +56,23 @@ class CalendarController extends AbstractController
         $result = $apiService->getDayData();
         $key = array_keys($result);
         $value = array_values($result);
-        //dd($result );
+        //dd($result )
+        $dateActuelle = new \DateTime();
+        //dd($dateActuelle->format('Y-m-d H:i:s'));
+
+        foreach ($travaux as $t) {
+            // Comparer les dates en utilisant le formatage
+            if ($t->getDebut()->format('Y-m-d H:i:s') == $dateActuelle->format('Y-m-d H:i:s')) {
+                $email = (new TemplatedEmail())
+                    ->from(new Address('yehouda@calendar.com', 'Rappel!!'))
+                    ->to($user->getEmail())
+                    ->subject('Don\'t forget your Task for now')
+                    ->htmlTemplate('calendar/Rappel.html.twig');
+
+                $mailer->send($email);
+            }
+        }
+
 
         return $this->render('calendar/index.html.twig', [
             'taches' => $tacheRepository->findByUser($user),

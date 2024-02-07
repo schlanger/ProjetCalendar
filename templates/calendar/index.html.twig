@@ -37,8 +37,8 @@
                         {
 
                             title  : '{{ tache.nom}}',
-                            start  : '{{ tache.debut ? tache.debut|date('Y-m-d')}}',
-                            end : '{{ tache.fin ? tache.fin|date('Y-m-d') : ''}}',
+                            start  : '{{ tache.debut ? tache.debut|date('Y-m-d h:i:s')}}',
+                            end : '{{ tache.fin ? tache.fin|date('Y-m-d h:i:s')}}',
                             color: '{{ tache.backgroundColor }}',
                             url : 'http://127.0.0.1:8000/tache/{{ tache.id }}/edit'
                         },

@@ -2,10 +2,12 @@
 
 namespace App\Form;
 
+use App\Entity\Categorie;
 use App\Entity\Tache;
 use Doctrine\DBAL\Types\BooleanType;
 use Doctrine\DBAL\Types\StringType;
 use phpDocumentor\Reflection\PseudoTypes\False_;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ColorType;
@@ -21,7 +23,7 @@ class TacheType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nom',TextType::class,array('attr'=>['class'=>'form-control']))
+            ->add('nom',TextType::class,array('attr'=>['class'=>'form-control','placeholder'=>'Nom de la tâche']))
             ->add('debut',DateTimeType::class,  [
                 'widget' => 'single_text',
                 'attr' => [
@@ -33,8 +35,8 @@ class TacheType extends AbstractType
                     'class' => 'form-control',
                     'max' => date('Y-m-d') ]])
             ->add('description',TextType::class,array('attr'=>['class'=>'form-control']))
-            ->add('ToutelaJournee')
-            ->add('background_color',ColorType::class)
+            ->add('background_color',ColorType::class,['attr'=>['class'=>'form-control'],'label'=>'Couleur de la tâche'])
+            ->add('Category',EntityType::class,['class'=>Categorie::class,'label'=>'nom de la catégorie','attr'=>['class'=>'form-control']]);
         ;
     }
 

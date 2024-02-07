@@ -45,6 +45,9 @@ class Tache
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user_id = null;
 
+    #[ORM\ManyToOne(inversedBy: 'taches')]
+    private ?Categorie $Category = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -140,6 +143,18 @@ class Tache
     public function setUserId(?User $user_id): static
     {
         $this->user_id = $user_id;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Categorie
+    {
+        return $this->Category;
+    }
+
+    public function setCategory(?Categorie $Category): static
+    {
+        $this->Category = $Category;
 
         return $this;
     }

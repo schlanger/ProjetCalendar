@@ -3,7 +3,7 @@
 {% block title %}Tache index{% endblock %}
 
 {% block body %}
-    <h1>Tache index</h1>
+    <h1>Mes Taches</h1>
 
     <table class="table">
         <thead>
@@ -13,7 +13,8 @@
                 <th>Debut</th>
                 <th>Fin</th>
                 <th>Description</th>
-                <th>Background_color</th>
+                <th>Couleur de la tache</th>
+                <th>Catégorie de la tache </th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -26,6 +27,7 @@
                 <td>{{ tache.fin ? tache.fin|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ tache.description }}</td>
                 <td>{{ tache.backgroundColor }}</td>
+                <td>{{ tache.category.nom ?? '' }}</td>
 
                 <td>
                     <a href="{{ path('app_tache_show', {'id': tache.id}) }}" class="btn btn-warning">show</a>

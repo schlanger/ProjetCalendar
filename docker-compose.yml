@@ -8,15 +8,16 @@ services:
       - "3306:3306"
     restart: always
     environment:
-      MYSQL_DATABASE: planning
+      MYSQL_DATABASE: Planning
       MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+      MYSQL_INIT_CONNECT: SET GLOBAL host_cache_size = 0
     #      MYSQL_ROOT_PASSWORD: yoo
     #      MYSQL_USER: yoo
     #      MYSQL_PASSWORD: yoo
     volumes:
       - ./var/dbdata:/var/lib/mysql
   phpmyadmin:
-    container_name: pma
+    container_name: pma-80ter
     image: phpmyadmin/phpmyadmin
     ports:
       - "8082:80"

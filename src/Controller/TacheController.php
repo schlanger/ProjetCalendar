@@ -44,7 +44,7 @@ class TacheController extends AbstractController
         }
         //echo $form->get('description')->getData();
 
-        return $this->renderForm('tache/new.html.twig', [
+        return $this->render('tache/new.html.twig', [
             'tache' => $tache,
             'form' => $form,
         ]);
@@ -76,7 +76,7 @@ class TacheController extends AbstractController
             return $this->redirectToRoute('app_tache_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('tache/edit.html.twig', [
+        return $this->render('tache/edit.html.twig', [
             'tache' => $tache,
             'form' => $form,
         ]);
